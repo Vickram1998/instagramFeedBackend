@@ -3,11 +3,11 @@ const bodyParser = require ('body-parser');
 const express = require("express");
 const cors = require('cors');
 const multer = require("multer");
-
+const Post = require("./modules/userModule")
 const app = express();
 const Port = 5500;
 
-// MongoDB connection
+
 mongoose.connect('mongodb://localhost:27017/Back-end', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -17,17 +17,7 @@ mongoose.connect('mongodb://localhost:27017/Back-end', {
     console.error("Failed to connect to MongoDB", err);
 });
 
-// Post schema and model
-const postSchema = new mongoose.Schema({
-    author: String,
-    location: String,
-    likes: { type: Number, default: 0 },
-    description: String,
-    postImage: String,
-    date: { type: Date, default: Date.now }
-});
 
-const Post = mongoose.model('Post', postSchema);
 
 const upload = multer({
     dest: 'uploads/images'
